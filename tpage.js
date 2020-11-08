@@ -1,5 +1,6 @@
 let teamName = document.getElementById('teamName');
 let playersList = document.getElementById('playersList');
+body = document.getElementById('teamPage');
 
 let params = new URLSearchParams(window.location.search);
 let teamId = params.get("teamName");
@@ -9,7 +10,7 @@ async function getTeamName() {
   await fetch('https://api.sportsdata.io/v3/nba/scores/json/teams?key=4a3c1ad9e42b4a3b892aa67ac688860b')
     .then((res) => res.json())
     .then((data) => {
-      teamName.innerHTML = data[teamId-1].City + ' ' + data[teamId-1].Name ;
+      teamName.innerHTML = data[teamId-1].City + ' ' + data[teamId-1].Name;
 })
 }
 
@@ -24,15 +25,15 @@ async function getData() {
       if(player.TeamID == teamId) {
         output += `
         <li class="list-group-item">
-        <span>
-        <img src="${player.PhotoUrl}"> ${player.FirstName} ${player.LastName}
-        </span>
-        <span>
-        Number: ${player.Jersey} 
-        Position: ${player.Position}
-        Height: ${player.Height}
-        Weight: ${player.Weight}
-        </span>
+        <div>
+        <img class="mr-4" src="${player.PhotoUrl}"> ${player.FirstName} ${player.LastName}
+        </div>
+        <div class="details">
+        <span class="mr-2">Number: ${player.Jersey}</span>
+        <span class="mr-2">Position: ${player.Position}</span>
+        <span class="mr-2">Height: ${player.Height}</span>
+        <span class="mr-2">Weight: ${player.Weight} </span>
+        </div>
         </li>
         `;
       }

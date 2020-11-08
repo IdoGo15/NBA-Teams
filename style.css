@@ -31,11 +31,6 @@ body {
   opacity: 0.9;
 }
 
-/* #playersList li span {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-} */
 
 #playersList li {
   display: flex;
@@ -47,4 +42,5 @@ body {
 #playersList img {
   border-radius: 20%;
 }
+
 
