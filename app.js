@@ -1,7 +1,16 @@
 
 const table = document.getElementById('tTable');
+let playersList = document.getElementsByClassName('playersList');
 
-table.addEventListener('click', moveToTeam);
+
+table.addEventListener('click', (e) => {
+  let teamName = `${e.target.id}`;
+
+  let params = new URLSearchParams();
+  params.append(`teamName`, teamName);
+  window.location.href = "teamPage.html?" + params.toString();
+});
+
 
 // Get Teams 
 async function getTeams() {
@@ -21,7 +30,7 @@ async function getTeams() {
       `;
       data.forEach(function(team) {
         output += `
-        <tr class="${team.TeamID}" style="background:#${team.SecondaryColor}; color:#${team.PrimaryColor}; padding-left:50px; padding-right:50px;">
+        <tr id="${team.TeamID}" style="background:#${team.SecondaryColor}; color:#${team.PrimaryColor}; padding-left:50px; padding-right:50px;">
           <th scope="row"><img src="${team.WikipediaLogoUrl}"></th>
           <td>${team.Name}</td>
           <td>${team.City}</td>
@@ -30,27 +39,21 @@ async function getTeams() {
         `;
       })
       output+= `</tbody>`
+      
       tTable.innerHTML = output;
+      
 
 })
 }
 
 getTeams();
 
-async function moveToTeam (e) {
-  window.location.href = "teamPage.html"
- await fetch('https://api.sportsdata.io/v3/nba/scores/json/Players?key=4a3c1ad9e42b4a3b892aa67ac688860b')
-  .then((res) => res.json()).then((data) => {
-    data.forEach(function(player) {
-      if(player.TeamID === e.target.classList) {
-        console.log(player.TeamID);
-      }
-    })
 
-    
-  })
 
-}
+
+
+
+
 
 
 
